@@ -1,0 +1,21 @@
+{
+  "name": "processing_presenter",
+  "version": "1.0.0",
+  "description": "An introductory presentation about Processing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Presentation",
+    "Processing",
+    "ProcessingJS",
+    "Markdown"
+  ],
+  "author": "Hans van Arken",
+  "license": "ISC",
+  "dependencies": {
+    "marked": "^0.3.6",
+    "processing-js": "^1.6.0"
+  }
+}
