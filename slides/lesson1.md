@@ -158,3 +158,20 @@ void draw() {
     }
 }
 ```
+<!--nextslide-->
+# Let's have some fun
+
+```text/x-java
+int x = 0;
+
+void setup() {
+    size(200,200);    
+    noStroke();
+    background(255, 255, 255);  
+}
+
+void draw() {    
+    fill(0, 128, 255);    
+    ellipse(x, 50, 25, 25);
+}
+```
