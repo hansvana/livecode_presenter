@@ -4,7 +4,7 @@
   "description": "An introductory presentation about Processing",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lite": "lite-server –port 10001"
   },
   "keywords": [
     "Presentation",
@@ -15,7 +15,11 @@
   "author": "Hans van Arken",
   "license": "ISC",
   "dependencies": {
+    "codemirror": "^5.18.2",
     "marked": "^0.3.6",
     "processing-js": "^1.6.0"
+  },
+  "devDependencies": {
+    "lite-server": "^1.3.1"
   }
 }

@@ -1,6 +1,5 @@
 var slides = [];
 var slideNo;
-
 function splitSlides(text){
   return text.split("<!--nextslide-->");
 }
@@ -14,24 +13,34 @@ function showSlide(markdown){
 
 function findCodeBlocks(){
   var codeblocks = slide.getElementsByTagName("pre");
+  console.log(codeblocks.length)
 
-  for (var i = 0; i < codeblocks.length; i++) {
+  var l = codeblocks.length;
+  for (var i = 0; i < l; i++) {
+    console.log(codeblocks.length,i);
+    var canvasContainer = document.createElement("div");
+    canvasContainer.classList.add("canvasContainer");
     var canvas = document.createElement("canvas");
+    canvas.width = canvas.height = "100";
+    canvasContainer.appendChild(canvas);
 
     var runBtn = document.createElement("div");
     runBtn.classList.add("runbutton");
 
-    var block = codeblocks[i];
+    var mirror = CodeMirror(function(el) {
+          codeblocks[i].parentNode.replaceChild(el, codeblocks[i]);
+        } , {
+          lineNumbers: true,
+          value: codeblocks[i].getElementsByTagName("code")[0].innerText,
+          mode:  "text/x-java"
+        });
 
     runBtn.addEventListener('click', function() {
-      console.log(block.getElementsByTagName("code")[0].innerText);
-      console.log(canvas);
-      var p = new Processing(canvas, block.getElementsByTagName("code")[0].innerText);
-    }, true);
-    
-    codeblocks[i].parentNode.insertBefore(canvas,codeblocks[i].nextElementSibling);
-    codeblocks[i].appendChild(runBtn);
-    codeblocks[i].contentEditable = true;
+      var p = new Processing(canvas, mirror.getValue());
+    }, true); 
+
+    mirror.display.wrapper.parentNode.insertBefore(canvasContainer,mirror.display.wrapper.nextElementSibling);
+    mirror.display.wrapper.parentNode.insertBefore(runBtn,mirror.display.wrapper);
   }
 }
 
@@ -50,8 +59,6 @@ function prevSlide(){
 }
 
 function keyParser(keyCode,ctrlKey,altKey,shiftKey) {
-  console.log(keyCode);
-  console.log(altKey);
   if (altKey && (keyCode === 39 || keyCode === 40)){
     nextSlide();
   }
@@ -72,8 +79,7 @@ function init() {
 
   ajax.get("slides/"+file+".md", function(fileContents) {
     slides = splitSlides(fileContents);
-    //showSlide(slides[slideNo]);
-    showSlide(slides[2]);
+    showSlide(slides[slideNo]);
   });
 }
 
