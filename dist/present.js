@@ -1,23 +1,21 @@
 var slides = [];
 var slideNo;
-function splitSlides(text){
-  return text.split("<!--nextslide-->");
-}
+var file;
 
 function showSlide(markdown){
   var slide = document.getElementById("slide");
 
+  history.pushState(null, null, "?file="+file+"&slide="+slideNo);
+
   slide.innerHTML = marked(markdown);
-  findCodeBlocks();
+  renderCodeBlocks();
 }
 
-function findCodeBlocks(){
+function renderCodeBlocks(){
   var codeblocks = slide.getElementsByTagName("pre");
-  console.log(codeblocks.length)
 
   var l = codeblocks.length;
   for (var i = 0; i < l; i++) {
-    console.log(codeblocks.length,i);
     var canvasContainer = document.createElement("div");
     canvasContainer.classList.add("canvasContainer");
     var canvas = document.createElement("canvas");
@@ -36,12 +34,19 @@ function findCodeBlocks(){
         });
 
     runBtn.addEventListener('click', function() {
-      var p = new Processing(canvas, mirror.getValue());
+      if (canvas.p !== undefined){
+        canvas.p.exit();
+      }
+      canvas.p = new Processing(canvas, mirror.getValue());
     }, true); 
 
     mirror.display.wrapper.parentNode.insertBefore(canvasContainer,mirror.display.wrapper.nextElementSibling);
     mirror.display.wrapper.parentNode.insertBefore(runBtn,mirror.display.wrapper);
   }
+}
+
+function splitSlides(text){
+  return text.split("<!--nextslide-->");
 }
 
 function nextSlide(){
@@ -68,12 +73,13 @@ function keyParser(keyCode,ctrlKey,altKey,shiftKey) {
 }
 
 function init() {
-
-  var file = getUrlParameter("file");
+  file = getUrlParameter("file");
   slideNo = getUrlParameter("slide");
 
-  if (!file)
+  if (!file) {
+    document.write("No file selected.");
     return;
+  }
 
   if (!slideNo) slideNo = 0;
 

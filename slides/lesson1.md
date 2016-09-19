@@ -159,19 +159,136 @@ void draw() {
 }
 ```
 <!--nextslide-->
-# Let's have some fun
+# Confetti
 
 ```text/x-java
-int x = 0;
+float x = 0;
+float y = 0;
 
 void setup() {
-    size(200,200);    
+    size(800,600);    
     noStroke();
-    background(255, 255, 255);  
+     background(255, 255, 255); 
 }
 
-void draw() {    
-    fill(0, 128, 255);    
-    ellipse(x, 50, 25, 25);
+void draw() {   
+    
+    fill(random(255),random(255),random(255)); 
+    
+    x = random(800);
+    y = random(600);
+    
+    ellipse(x, y, 25, 25);
+}
+```
+<!--nextslide-->
+# Mousefollower
+
+```text/x-java
+float x = 0;                  // these are the variables we need, all floating point values
+float y = 0;
+float xSpeed = 0;
+float ySpeed = 0;
+
+void setup() {
+    size(800,600);    
+    noStroke();
+    background(255, 255, 255); 
+}
+
+void draw() {   
+    
+    fill(random(255),random(255),random(255)); // pick a random RGB color
+    
+    if (mouseX > x) {         // if the mouse is to the right of the ellipse
+      xSpeed = xSpeed + 0.2;  // make its horizontal speed bigger
+    } else {                  // if it's not
+      xSpeed = xSpeed - 0.2;  // make the speed smaller
+    }
+    if (mouseY > y) {         // same for vertical
+      ySpeed = ySpeed + 0.2; 
+    } else {
+      ySpeed = ySpeed - 0.2;
+    }
+    
+    if (xSpeed > 3) {          // if the speed is too high
+       xSpeed = 3;             // set it to a maximum
+    }
+    
+    if (ySpeed > 3) {
+       ySpeed = 3;
+    }
+    
+    x = x + xSpeed;            // add (or distract) the speed to (or from) the position 
+    y = y + ySpeed;
+    
+    ellipse(x, y, 25, 25);     // draw the ellipse at the x and y coordinates
+}
+```
+<!--nextslide-->
+# Color thingy
+
+```text/x-java
+float x = 0;    // our 'follower' follows the mouse, with coordinates and a speed
+float y = 0;
+float xSpeed = 0;
+float ySpeed = 0;
+
+float h = 0;    // a variable so we can store the hue
+
+void setup() {
+  colorMode(HSB,255);   // the colormode is HSB, so we can keep the saturation and brightness the same
+                        // and only change the hue
+  size(1000,800);
+  stroke(128,20);
+  background(0);
+}
+
+void draw() {
+  //create 4 random points around our follower
+  float x1 = x + random(-20,20);
+  float y1 = y + random(-20,20);
+  float x2 = x + random(-20,20);
+  float y2 = y + random(-20,20);
+  float x3 = x + random(-20,20);
+  float y3 = y + random(-20,20);
+  float x4 = x + random(-20,20);
+  float y4 = y + random(-20,20);
+  
+  h = h + 0.5; // slowly increase the hue
+  if (h > 255) h = 0;
+  
+  stroke(h,255,255,20);
+  
+  if (mouseX > x) {         // if the mouse is to the right of the ellipse
+      xSpeed = xSpeed + 0.2;  // make its horizontal speed bigger
+    } else {                  // if it's not
+      xSpeed = xSpeed - 0.2;  // make the speed smaller
+    }
+    if (mouseY > y) {         // same for vertical
+      ySpeed = ySpeed + 0.2; 
+    } else {
+      ySpeed = ySpeed - 0.2;
+    }
+    
+    if (xSpeed > 3) {          // if the speed is too high
+       xSpeed = 3;             // set it to a maximum
+    }
+    
+    if (ySpeed > 3) {
+       ySpeed = 3;
+    }
+    
+    x = x + xSpeed;            // add (or distract) the speed to (or from) the position 
+    y = y + ySpeed;
+  
+  
+  
+  // draw the lines
+  line(x1, y1, mouseX + random(-20,20), mouseY + random(-20,20));
+  line(x2, y2, mouseX + random(-20,20), mouseY + random(-20,20));
+  line(x3, y3, mouseX + random(-20,20), mouseY + random(-20,20));
+  line(x4, y4, mouseX + random(-20,20), mouseY + random(-20,20));
+  
 }
 ```
