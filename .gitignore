@@ -1,1 +1,15 @@
-node_modules/
+
+!node_modules/
+node_modules/*
+
+!node_modules/codemirror/
+node_modules/codemirror/*
+!node_modules/codemirror/lib/
+
+!node_modules/marked
+node_modules/marked/*
+!node_modules/marked/marked.min.js
+
+!node_modules/processing-js
+node_modules/processing-js/*
+!node_modules/processing-js/processing.min.js
