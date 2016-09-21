@@ -14,10 +14,13 @@ h6 {
     font-size: 0.4em;
 }
 
+.codeContainer {
+    display: flex;
+}
+
 .canvasContainer, .Codemirror {    
     width: 50%;
     box-sizing: border-box;
-    float: left;
     position: relative;
 }
 
@@ -52,8 +55,15 @@ h6 {
     background-color: #aaa;
     margin-bottom: 4px;
 }
+.runbutton::after {
+    content: ' ';
+    flex-basis: 100%;
+}
 
 img:not([class]) {
     max-width: 100%;
     max-height: 70vh;
+}
+p > code {
+    background-color: rgb(102, 204, 255);
 }

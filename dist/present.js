@@ -16,6 +16,11 @@ function renderCodeBlocks(){
 
   var l = codeblocks.length;
   for (var i = 0; i < l; i++) {
+    var codeContainer = document.createElement("div");
+    codeContainer.classList.add("codeContainer");
+    codeblocks[i].parentNode.insertBefore(codeContainer, codeblocks[i]);
+    codeContainer.appendChild(codeblocks[i]);
+    
     var canvasContainer = document.createElement("div");
     canvasContainer.classList.add("canvasContainer");
     var canvas = document.createElement("canvas");
@@ -41,7 +46,7 @@ function renderCodeBlocks(){
     }, true); 
 
     mirror.display.wrapper.parentNode.insertBefore(canvasContainer,mirror.display.wrapper.nextElementSibling);
-    mirror.display.wrapper.parentNode.insertBefore(runBtn,mirror.display.wrapper);
+    codeContainer.parentNode.insertBefore(runBtn, codeContainer);
   }
 }
 
