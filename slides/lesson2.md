@@ -1,7 +1,7 @@
 # Introduction to Processing
 ### Hans van Arken
 2016-2017
-
+![Wordcloud](img/cloud.jpg)
 <!--nextslide-->
 ## Strings
 
