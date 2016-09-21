@@ -55,10 +55,6 @@ h6 {
     background-color: #aaa;
     margin-bottom: 4px;
 }
-.runbutton::after {
-    content: ' ';
-    flex-basis: 100%;
-}
 
 img:not([class]) {
     max-width: 100%;
