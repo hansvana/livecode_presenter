@@ -64,3 +64,26 @@ img:not([class]) {
 p > code {
     background-color: rgb(102, 204, 255);
 }
+
+#welcomeMessage {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    animation: SLIDEOUT 5s;
+    animation-fill-mode: forwards;
+}
+
+#welcomeMessage span {
+    background: linear-gradient(to bottom, #ffc578 0%,#fb9d23 100%);
+    border: 1px solid #fb9d23;
+    font-size: small;
+    padding: 2px 20px;
+    border-radius: 0px 0px 5px 5px;
+}
+
+@-webkit-keyframes SLIDEOUT {
+    0%   { top: 0; }
+    75%  { top: 0; }
+    100% { top: -30px; }
+}

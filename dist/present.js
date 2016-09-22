@@ -82,7 +82,7 @@ function init() {
   slideNo = getUrlParameter("slide");
 
   if (!file) {
-    document.write("No file selected.");
+    document.appendChild(document.createTextNode("No file selected."));
     return;
   }
 
