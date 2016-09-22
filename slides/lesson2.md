@@ -81,6 +81,17 @@ void draw() {
 }
 ```
 <!--nextslide-->
+## toLowerCase
+```text/x-java
+String prologue = "Two households, both alike in dignity";
+
+prologue = prologue.toLowerCase();
+
+// two households, both alike in dignity
+
+```
+
+<!--nextslide-->
 ## Array
 
 Array is a fancy word for list.
@@ -106,6 +117,8 @@ void setup() {
 
   prologue = prologue.replaceAll("\\,", "");
   prologue = prologue.replaceAll("\\.", "");
+  prologue = prologue.replaceAll("\\;", "");
+  prologue = prologue.toLowerCase();
   words = split(prologue, " ");
 }
 
@@ -138,12 +151,14 @@ void setup() {
 
   prologue = prologue.replaceAll("\\,", "");
   prologue = prologue.replaceAll("\\.", "");
+  prologue = prologue.replaceAll("\\;", "");
+  prologue = prologue.toLowerCase();
   words = split(prologue, " ");
 }
 
 void draw() {  
   for (String word : words) {
-    text(word, 0, 10));
+    text(word, 0, 10);
   }
 }
 ```
@@ -227,7 +242,7 @@ void setup() {
 void draw() {
   for (String[] word : words){
     textSize(random(10,30));
-    text(word[0], random(400), random(400));
+    text(word[0], random(300), random(300));
   }
   noLoop();
 }
